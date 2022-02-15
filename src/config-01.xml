@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 객체 등록을 위해 bean 을  활용한다 -->
+	<!-- service layer -->
+	<bean class="edupoll.model.DefaultQuest" id="dq"></bean>
+	<bean class="edupoll.model.LimitedQuest" id="lq">
+		<property name="valid" value = "3" />
+	</bean>
+	<bean class="edupoll.model.LimitedQuest" id="lq2">
+		<property name="valid" value = "1" />
+	</bean>
+	<!-- value 는 문자열, 논리데이터, 수치 / 객체 참조가 아님 -->
+  
+	<!-- controller layer -->
+	<!-- 생성자를 통해 주입 -->
+	<!-- Hero(Quest) 로 객체 생성 후 등록 -->
+	<bean class="edupoll.actor.Hero" id="hero_1">
+		<constructor-arg name = "quest" ref="dq" />
+	</bean>
+	<!-- Hero() 로 객체 생성 후 setter 처리 후  등록 -->
+	<bean class="edupoll.actor.Hero" id="hero_2">
+		<!-- set을 통해 추가로 주입 -->
+		<property name="quest" ref="lq" />
+	</bean>
+	<bean class="edupoll.actor.Hero" id="hero_3">
+		<!-- set을 통해 추가로 주입 -->
+		<property name="quest" ref="lq" />
+	</bean>
+	
+</beans>
